@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>Escape Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Orbitron:wght@400;500;600;700&family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+  <div id="background" class="background" aria-hidden="true"></div>
+  <audio id="music" loop></audio>
+
+  <main id="public-view" class="container public-view" hidden>
+    <section class="public-intro">
+      <p class="public-eyebrow">Aventura interactiva al aire libre</p>
+      <h1 id="public-title"></h1>
+      <p id="public-description" class="intro"></p>
+      <p id="qr-notice" class="qr-notice" role="status" hidden></p>
+    </section>
+
+    <section class="public-section" aria-labelledby="experiences-title">
+      <h2 id="experiences-title"></h2>
+      <div id="experience-list" class="experience-list"></div>
+      <p id="experience-selection" class="experience-selection" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="public-section booking-section" aria-labelledby="booking-title">
+      <h2 id="booking-title"></h2>
+      <p id="booking-description"></p>
+      <a id="booking-link" class="primary-button booking-link" hidden></a>
+    </section>
+
+    <section id="access-view" class="access-section" aria-labelledby="access-title" hidden>
+      <div class="access-symbol" aria-hidden="true">✦</div>
+      <h2 id="access-title">Acceso a la aventura</h2>
+      <p class="access-description">Introduce tu código de acceso para comenzar.</p>
+      <form id="access-form" class="access-form">
+        <label for="access-code">Código de acceso</label>
+        <input id="access-code" name="code" type="text" autocomplete="one-time-code"
+          autocapitalize="characters" spellcheck="false" required maxlength="128">
+        <button id="access-submit" class="primary-button" type="submit">Validar acceso</button>
+      </form>
+      <p id="access-error" class="access-error" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <div id="game-content" hidden>
+    <button id="music-button" class="music-button" type="button"></button>
+
+    <main class="container">
+      <img id="game-logo" class="logo" alt="">
+      <h1 id="game-title"></h1>
+      <p id="game-intro" class="intro"></p>
+      <p id="progress" class="progress" aria-live="polite"></p>
+
+      <section class="challenge" aria-labelledby="stage-title">
+        <h2 id="stage-title"></h2>
+        <p id="stage-prompt" class="prompt"></p>
+        <div id="challenge-content"></div>
+        <button id="check-button" class="primary-button" type="button"></button>
+        <button id="hint-button" class="secondary-button" type="button" hidden></button>
+        <p id="hint" class="hint" hidden></p>
+        <div id="result" class="result" role="status" aria-live="polite"></div>
+        <button id="continue-button" class="continue-button" type="button" hidden></button>
+      </section>
+
+      <p id="notice" class="notice" role="status" aria-live="polite"></p>
+      <footer id="game-footer" class="footer"></footer>
+    </main>
+  </div>
+
+  <main id="expired-view" class="container expired-view" hidden>
+    <div class="expired-symbol" aria-hidden="true">🔒</div>
+    <h1 id="expired-title"></h1>
+    <p id="expired-message" class="expired-message"></p>
+  </main>
+
+  <main id="session-blocked" class="container expired-view" hidden>
+    <div class="expired-symbol" aria-hidden="true">🔒</div>
+    <h1 id="session-blocked-title"></h1>
+    <p id="session-blocked-message" class="expired-message"></p>
+  </main>
+
+  <script>
+    window.ESCAPE_AUTH_READY = new Promise(function (resolve) {
+      let completed = false;
+      let timeout;
+      window.finishEscapeAuth = function (result) {
+        if (completed) return;
+        completed = true;
+        window.clearTimeout(timeout);
+        resolve(result);
+      };
+      timeout = window.setTimeout(function () {
+        window.finishEscapeAuth({
+          allowed: false,
+          title: "🔒 No se pudo validar la sesión",
+          message: "No se recibió respuesta de Firebase. Comprueba tu conexión y vuelve a cargar la página."
+        });
+      }, 15000);
+    });
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBonaZQAH_5whKokDV8lnl2eP70WINPRTw",
+      authDomain: "quiz-teams-414d7.firebaseapp.com",
+      projectId: "quiz-teams-414d7",
+      storageBucket: "quiz-teams-414d7.firebasestorage.app",
+      messagingSenderId: "834996635016",
+      appId: "1:834996635016:web:c48a60c6643d27bb6c263d"
+    };
+
+    window.escapeFirebaseApp = initializeApp(firebaseConfig);
+  </script>
+  <script type="module" src="js/firebase-auth.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/minigames.js"></script>
+  <script src="js/engine.js"></script>
+</body>
+</html>
