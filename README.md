@@ -126,6 +126,8 @@ se comprueba de nuevo en Firestore al recargar y al abrir otro juego.
 consumir un código que todavía no se haya usado y crear la sesión y su registro
 de experiencia en la misma transacción. Solo permite leer individualmente las
 sesiones y deniega actualizaciones y borrados desde el cliente. Este repositorio
+Las reglas toleran hasta cinco minutos de diferencia entre el reloj del
+navegador y el servidor al calcular la caducidad de la sesión. Este repositorio
 y `Quiz` usan el mismo proyecto Firebase, que solo admite un conjunto de reglas
 de Firestore: publicar las reglas desde una aplicación reemplaza las reglas de
 la otra. Por eso los archivos `firestore.rules` de Harry Potter, Template,
