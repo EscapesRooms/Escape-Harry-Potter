@@ -76,8 +76,8 @@ function renderPublicPortal() {
     if (!experience || typeof experience.title !== "string") {
       throw new Error("Cada experiencia de publicPortal necesita un title.");
     }
-    if (!["harry-potter", "stranger-things"].includes(experience.id)) {
-      throw new Error("Cada experiencia debe tener un id reconocido: harry-potter o stranger-things.");
+    if (!["harry-potter", "stranger-things", "la-ultima-pieza"].includes(experience.id)) {
+      throw new Error("Cada experiencia debe tener un id reconocido: harry-potter, stranger-things o la-ultima-pieza.");
     }
     const card = document.createElement("button");
     card.type = "button";

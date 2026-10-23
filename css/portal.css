@@ -138,6 +138,19 @@ body.portal-mode .experience-card--stranger-things h3 {
   text-shadow: 0 0 5px rgba(212, 175, 55, 0.7), 2px 2px 0 #063bff;
 }
 
+body.portal-mode .experience-card--la-ultima-pieza {
+  border-color: rgba(232, 149, 74, 0.62);
+  background: linear-gradient(145deg, rgba(232, 149, 74, 0.15), rgba(11, 16, 17, 0.92) 72%);
+  box-shadow: inset 0 0 24px rgba(145, 213, 196, 0.07), 0 0 14px rgba(232, 149, 74, 0.12);
+}
+
+body.portal-mode .experience-card--la-ultima-pieza h3 {
+  color: #f0c18f;
+  font-family: "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.035em;
+  text-shadow: 0 0 12px rgba(232, 149, 74, 0.3);
+}
+
 body.portal-mode .booking-section {
   text-align: center;
 }

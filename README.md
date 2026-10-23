@@ -10,6 +10,8 @@ Al abrir la dirección principal se muestra un portal público con información
 de las experiencias y un apartado para introducir el código. Si se escanea un
 QR de una prueba sin tener una sesión activa, el portal explica que forma parte
 de un recorrido y solicita el código antes de mostrar el juego.
+El portal permite elegir Harry Potter, Stranger Things o La Última Pieza; cada
+código consumido queda asociado a la aventura elegida en Firebase.
 
 Configura el contenido del portal en `publicPortal`, dentro de `js/config.js`:
 puedes añadir o quitar experiencias y definir un enlace de reservas, WhatsApp o
@@ -116,18 +118,20 @@ documento de sesión en `sesiones_juego` y crea una entrada de auditoría en
 `activa: true`, `expiresAt` como Timestamp de Firestore, `codigoId` y
 `experiencia`. Así se puede distinguir, por ejemplo,
 `experiencias/harry-potter/accesos` de
-`experiencias/stranger-things/accesos`. La sesión se guarda en el navegador y
+`experiencias/stranger-things/accesos` y
+`experiencias/la-ultima-pieza/accesos`. La sesión se guarda en el navegador y
 se comprueba de nuevo en Firestore al recargar y al abrir otro juego.
 
 `firestore.rules` permite leer códigos individuales (no listar la colección),
 consumir un código que todavía no se haya usado y crear la sesión y su registro
 de experiencia en la misma transacción. Solo permite leer individualmente las
-sesiones y deniega actualizaciones y borrados desde el cliente. Este repositorio y `Quiz` usan el
-mismo proyecto Firebase, que solo admite un conjunto de reglas de Firestore:
-publicar las reglas desde una aplicación reemplaza las reglas de la otra. Por
-eso ambos archivos `firestore.rules` contienen las reglas combinadas para el
-Escape Room y los rankings del Quiz. Mantén ambos archivos sincronizados y
-publica las reglas combinadas desde esta carpeta con:
+sesiones y deniega actualizaciones y borrados desde el cliente. Este repositorio
+y `Quiz` usan el mismo proyecto Firebase, que solo admite un conjunto de reglas
+de Firestore: publicar las reglas desde una aplicación reemplaza las reglas de
+la otra. Por eso los archivos `firestore.rules` de Harry Potter, Template,
+La Última Pieza y Quiz contienen las reglas combinadas para los tres Escape
+Rooms y los rankings del Quiz. Mantén esas copias sincronizadas y publica las
+reglas combinadas desde esta carpeta con:
 
 ```powershell
 npx.cmd firebase-tools deploy --only firestore:rules

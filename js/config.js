@@ -35,6 +35,12 @@ window.ESCAPE_CONFIG = {
         title: "Stranger Things",
         theme: "stranger-things",
         url: "../Escape-Stranger-Things/index.html"
+      },
+      {
+        id: "la-ultima-pieza",
+        title: "La Última Pieza",
+        theme: "la-ultima-pieza",
+        url: "../Escape-La-Ultima-Pieza/index.html"
       }
     ],
     bookingTitle: "¿Quieres organizar una partida?",
